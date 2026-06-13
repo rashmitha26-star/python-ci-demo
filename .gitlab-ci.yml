@@ -1,0 +1,34 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build-job:
+  stage: build
+  image: python:3.11
+
+  before_script:
+    - pip install pytest
+
+  script:
+    - echo "Build complete"
+
+test-job:
+  stage: test
+  image: python:3.11
+
+  before_script:
+    - pip install pytest
+
+  script:
+    - pytest test_app.py -v
+
+deploy-job:
+  stage: deploy
+  image: python:3.11
+
+  script:
+    - echo "Deploying to staging..."
+
+  only:
+    - main
